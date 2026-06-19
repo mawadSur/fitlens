@@ -1,0 +1,44 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+*.egg-info/
+.pytest_cache/
+.fitlens.db
+*.db-journal
+
+# Node / Next
+node_modules/
+.next/
+out/
+dist/
+*.tsbuildinfo
+
+# Env / secrets
+.env
+.env.local
+!.env.example
+
+# OS / editor
+.DS_Store
+.idea/
+.vscode/
+
+# Models / caches
+.fastembed_cache/
+test-results/
+playwright-report/
+
+# Local agent/tooling runtime state — never commit
+*.db
+*.db-shm
+*.db-wal
+ruvector.db
+*.rvf
+*.rvf.lock
+.swarm/
+.claude-flow/
+.claude/
+CLAUDE.md
+.mcp.json

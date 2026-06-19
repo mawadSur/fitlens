@@ -1,0 +1,25 @@
+Alembic migrations for the FitLens API.
+
+Layout
+  alembic.ini            Config; sqlalchemy.url is a placeholder.
+  alembic/env.py         Puts `app` on sys.path, targets Base.metadata, and
+                         overrides the URL with app.config.settings.database_url
+                         at runtime (so DATABASE_URL controls the target DB).
+  alembic/versions/      Revision scripts.
+
+Common commands (run from apps/api with the venv active):
+
+  # Apply all migrations to the configured database.
+  .venv/bin/alembic upgrade head
+
+  # Target a throwaway database without touching your dev DB.
+  DATABASE_URL=sqlite:////tmp/fitlens_migtest.db .venv/bin/alembic upgrade head
+
+  # Roll everything back.
+  .venv/bin/alembic downgrade base
+
+  # Generate a new revision from model changes (review the output!).
+  .venv/bin/alembic revision --autogenerate -m "describe change"
+
+SQLite uses batch mode (render_as_batch=True) so ALTER-style changes work via
+the table-copy workaround. Postgres applies ALTERs directly.
