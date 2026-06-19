@@ -2,6 +2,8 @@
 
 Agentic Bench Sales Operating System (BSOS) for staffing firms running H1B / OPT / GC / USC / C2C / W2 consultants. This repo is a **working vertical slice** of the PRD built on the PRD stack (FastAPI + Next.js + SQLAlchemy + ONNX embeddings), with all 12 agents present and the bench → match → submit → interview loop fully functional, tested, and Chrome-validated.
 
+**Live demo:** https://fitlens-web.vercel.app — frontend on Vercel, FastAPI backend on Vercel Python serverless. It's a stateless demo: data re-seeds on cold start and matching uses the deterministic hashing embedder (no ONNX model in the serverless build).
+
 See **[STATUS.md](./STATUS.md)** for the precise ✅ live / 🟡 scaffolded / 🔴 blocked status of every PRD component.
 
 ## Architecture
@@ -34,7 +36,7 @@ Makefile                    make install / test / api / web / migrate / e2e
 **Backend** (port 8000):
 ```bash
 cd apps/api
-uv venv .venv && uv pip install --python .venv/bin/python -r requirements.txt
+uv venv .venv && uv pip install --python .venv/bin/python -r requirements-dev.txt
 .venv/bin/uvicorn app.main:app --port 8000     # auto-seeds demo data on first boot
 ```
 

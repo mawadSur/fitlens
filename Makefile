@@ -2,7 +2,7 @@
 
 install:
 	uv venv apps/api/.venv
-	uv pip install --python apps/api/.venv/bin/python -r apps/api/requirements.txt
+	uv pip install --python apps/api/.venv/bin/python -r apps/api/requirements-dev.txt
 	cd apps/web && npm install
 
 test:

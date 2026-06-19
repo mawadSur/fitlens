@@ -1,0 +1,11 @@
+.venv/
+__pycache__/
+*.pyc
+tests/
+.pytest_cache/
+alembic/
+*.db
+*.db-shm
+*.db-wal
+.fitlens.db
+requirements-dev.txt
