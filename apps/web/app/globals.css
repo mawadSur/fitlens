@@ -3,27 +3,66 @@
 @tailwind utilities;
 
 :root {
-  color-scheme: dark;
+  color-scheme: light;
 }
 
-body {
-  @apply bg-ink text-slate-200;
+@layer base {
+  body {
+    @apply bg-canvas text-ink antialiased;
+    font-feature-settings: "cv02", "cv03", "cv04", "ss01";
+  }
+  /* Subtle, fresh background wash — fixed so it never scrolls or shifts layout. */
+  body::before {
+    content: "";
+    @apply pointer-events-none fixed inset-0 -z-10;
+    background:
+      radial-gradient(60rem 60rem at 110% -10%, rgb(99 102 241 / 0.10), transparent 60%),
+      radial-gradient(50rem 50rem at -10% 0%, rgb(56 189 248 / 0.08), transparent 55%);
+  }
+  h1, h2, h3 {
+    @apply font-display tracking-tight;
+  }
+  ::selection {
+    @apply bg-brand/20;
+  }
 }
 
 @layer components {
   .card {
-    @apply rounded-xl border border-edge bg-panel p-5 shadow-lg shadow-black/20;
+    @apply rounded-2xl border border-edge bg-surface p-5 shadow-card;
+  }
+  .card-hover {
+    @apply transition-shadow duration-200 hover:shadow-lift;
   }
   .stat-num {
-    @apply text-3xl font-semibold text-white;
+    @apply font-display text-3xl font-semibold tracking-tight text-ink tabular-nums;
+  }
+  .eyebrow {
+    @apply text-[11px] font-semibold uppercase tracking-[0.12em] text-faint;
   }
   .pill {
-    @apply inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium;
+    @apply inline-flex items-center gap-1 rounded-full px-2.5 py-0.5 text-xs font-medium;
   }
+  .badge-brand { @apply bg-brand/10 text-brand-ink; }
+  .badge-good  { @apply bg-good/10 text-good; }
+  .badge-warn  { @apply bg-warn/10 text-warn; }
+  .badge-bad   { @apply bg-bad/10 text-bad; }
+  .badge-muted { @apply bg-slate-100 text-slate-600; }
+
   .btn {
-    @apply inline-flex items-center justify-center rounded-lg bg-brand px-3.5 py-2 text-sm font-medium text-white transition hover:bg-brand-soft disabled:opacity-50;
+    @apply inline-flex items-center justify-center gap-1.5 rounded-xl bg-brand px-3.5 py-2 text-sm font-medium text-white shadow-sm transition-all duration-200 hover:bg-brand-soft hover:shadow-lift focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand/40 focus-visible:ring-offset-2 focus-visible:ring-offset-canvas disabled:cursor-not-allowed disabled:opacity-50 disabled:shadow-none;
   }
   .btn-ghost {
-    @apply inline-flex items-center justify-center rounded-lg border border-edge px-3.5 py-2 text-sm font-medium text-slate-300 transition hover:border-brand;
+    @apply inline-flex items-center justify-center gap-1.5 rounded-xl border border-edge bg-surface px-3.5 py-2 text-sm font-medium text-slate-700 transition-colors duration-200 hover:border-brand/40 hover:text-brand focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand/30;
+  }
+  .table-row {
+    @apply border-t border-edge/70 transition-colors hover:bg-slate-50/70;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
   }
 }
